@@ -1,11 +1,11 @@
-import {TodosPage} from './components/TodosPage.jsx';
+import { TodosPage } from './components/todos-page/TodosPage';
 import styles from './App.module.css';
 
-export function App(){
+export function App() {
 	return (
 		<div className={styles.App}>
 			<h1 className={styles.title}>To-Do List</h1>
-			<TodosPage/>
+			<TodosPage />
 		</div>
 	);
 }

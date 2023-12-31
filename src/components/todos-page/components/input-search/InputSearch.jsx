@@ -1,7 +1,10 @@
 import React from "react";
-import styles from '../App.module.css';
+import styles from '../../../../App.module.css';
+import { useTodos } from "../../TodosPage";
 
-export function InputSearch({searchQuery, setSearchQuery}){
+export function InputSearch(){
+	const {searchQuery, setSearchQuery} = useTodos();
+
 	function handleChange(event){
 		setSearchQuery(event.target.value)
 	};

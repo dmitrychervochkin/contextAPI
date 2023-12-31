@@ -1,15 +1,15 @@
 import React, {useState, useEffect, useContext} from "react";
 import * as yup from 'yup';
-import {TextField} from './TextField';
-import { AppContext } from "../context";
+import {TextField} from './components/text-field/TextField';
+import { AppContext } from "../../../../../../../../context";
 
 const validateSchema = yup.object().shape({});
 function parceYupError(){};
 
-export function EditTodo({ handleEdit, ...props }){
+export function EditTodo({ ...props }){
 	const [error, setError] = useState({});
 	const [value, setValue] = useState({...props});
-	const { editTodo } = useContext(AppContext);
+	const { editTodo, handleEdit } = useContext(AppContext);
 
 	function handleChange(event){
 		const {name, value} = event.target;
@@ -50,13 +50,9 @@ export function EditTodo({ handleEdit, ...props }){
 			<TextField
 				value={value.title}
 				id='title'
-				type='text'
-				name='title'
 				onChange={handleChange}
-				placeholder='Введите title'
 				error={error.title}
 			/>
-
 		</form>
 	)
 };

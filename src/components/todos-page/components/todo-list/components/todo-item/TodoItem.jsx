@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import styles from '../App.module.css';
-import { EditTodo } from './EditTodo';
-import { AppContext } from '../context';
+import styles from '../../../../../../App.module.css';
+import { EditTodo } from './components/edit-todo/EditTodo';
+import { AppContext } from '../../../../../../context';
 
 export function TodoItem({ ...props }){
 	const [isEdit, setIsEdit] = useState(false);
-	const { completeTodo, editTodo, deleteTodo } = useContext(AppContext);
+	const { completeTodo, deleteTodo } = useContext(AppContext);
 
 	function handleEdit(){
 		setIsEdit((prevState) => !prevState)
@@ -18,7 +18,10 @@ export function TodoItem({ ...props }){
 	return(
 		<>
 			{isEdit ? (
-				<EditTodo {...props} handleEdit={handleEdit} editTodo={editTodo} />
+				<AppContext.Provider value={handleEdit}>
+					<EditTodo {...props} />
+				</AppContext.Provider>
+
 			) : (
 				<li className={styles.TodoTitle}>
 					<div className={styles.inputBox}>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import styles from '../App.module.css';
-import { useDebounce } from "../hooks/useDebounce";
-import { InputSearch } from "./InputSearch";
-import { TodoList } from "./TodoList";
-import { TodoInput } from "./TodoInput";
-import { AppContext } from '../context.js';
+import styles from '../../App.module.css';
+import { useDebounce } from "../../hooks/useDebounce.jsx";
+import { InputSearch } from "./components/input-search/InputSearch.jsx";
+import { TodoList } from "./components/todo-list/TodoList.jsx";
+import { TodoInput } from "./components/todo-input/TodoInput.jsx";
+import { AppContext } from '../../context.js';
 
 const TodosContext = createContext({});
 export const useTodos = () => {
@@ -114,10 +114,22 @@ export function TodosPage(){
 	}, [debounceValue, refreshTodos]);
 
 	return(
-		<AppContext.Provider value={{todos, addTodo, editTodo, deleteTodo, completeTodo }}>
+		<AppContext.Provider
+			value={{
+				todos,
+				addTodo,
+				editTodo,
+				deleteTodo,
+				completeTodo,
+				searchQuery,
+				setSearchQuery,
+				note,
+				setNote
+			}}
+		>
 			<div>
 				<div className={styles.others}>
-					<InputSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+					<InputSearch />
 					<button onClick={sortTodos} className={styles.sortBtn}>Sort cases</button>
 				</div>
 
@@ -125,7 +137,7 @@ export function TodosPage(){
 					<div className={styles.loader}></div>
 				) : (
 					<>
-						<TodoInput note={note} setNote={setNote}/>
+						<TodoInput />
 						<TodoList />
 					</>
 						)}
